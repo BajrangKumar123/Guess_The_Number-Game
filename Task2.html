@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess The Number!</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="card">
+        <div class="card2">
+            <h1>Guess The Number Game!</h1>
+            <p style="text-align: center; font-weight: bold;">Try to guess the number between 1 and 10!</p>
+            <div class="input-group">
+                <input id="input-field" type="number" placeholder="Guess The Number">
+                <button type="button" id="btn" class="submit-button" onclick="checkNumber()"><span>GUESS</span></button>
+            </div>
+            <p id="atp"></p>
+            <p id="success"></p>
+            <p id="over"></p>
+        </div>
+    </div>
+</body>
+<script>
+    var atp_count = 10;
+    function checkNumber() {
+        // Number guessed by user   
+        var x = Number(document.getElementById("input-field").value);
+        var y = Math.floor(Math.random() * 10) + 1;
+
+        var atpMessage = document.getElementById("atp");
+        var successMessage = document.getElementById("success");
+        var overMessage = document.getElementById("over");
+
+        //....Total Number of Attempts!
+
+        //....Check for User Input is NUmber or Not!
+        if (isNaN(x)) {
+            atpMessage.innerHTML = "That is not a Number!";
+            overMessage.style.color = "red";
+        }
+        //....Check for Input Number matched the Guessed number!
+        if (x == y) {
+            successMessage.innerHTML = "Congratulations! You got the Number!";
+            successMessage.style.color = "green";
+        }
+        else {
+            atp_count--;
+            // console.log(atp_count);
+            if (atp_count < 0) {
+                atp_count = 0;
+                overMessage.innerHTML = "Game Over!";
+                overMessage.style.color = "red";
+            }
+            else {
+                atpMessage.innerHTML = "Try again!" + atp_count + " more attempts left!";
+            }
+        }
+        //...If number of Attempts is 0!
+
+    }
+</script>
+
+</html>
